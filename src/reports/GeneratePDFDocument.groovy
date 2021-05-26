@@ -300,7 +300,7 @@ class GeneratePDFDocument {
 
         //------------
         PdfPCell cell51 = new PdfPCell()
-        cell51.addElement(new Phrase("    5.1 Detalle de Hallazgos.",fontAndSize11))
+        cell51.addElement(new Phrase("    5.1 Resumen de Hallazgos.",fontAndSize11))
         cell51.setPadding(5)
         cell51.setColspan(7)
         cell51.setUseAscender(true)
@@ -318,8 +318,27 @@ class GeneratePDFDocument {
         cellPag62.setBorderColor(BaseColor.WHITE)
         table.addCell(cellPag62)
         //------------
+        PdfPCell cell52 = new PdfPCell()
+        cell52.addElement(new Phrase("    5.2 Resumen de Hallazgos.",fontAndSize11))
+        cell52.setPadding(5)
+        cell52.setColspan(7)
+        cell52.setUseAscender(true)
+        cell52.setUseDescender(true)
+        cell52.setHorizontalAlignment(Element.ALIGN_CENTER)
+        cell52.setBorderColor(BaseColor.WHITE)
+        table.addCell(cell52)
+
+        PdfPCell cellPag71 = new PdfPCell()
+        cellPag71.addElement(new Phrase("7"))
+        cellPag71.setPadding(5)
+        cellPag71.setUseAscender(true)
+        cellPag71.setUseDescender(true)
+        cellPag71.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT)
+        cellPag71.setBorderColor(BaseColor.WHITE)
+        table.addCell(cellPag71)
+        //------------
         PdfPCell cell511 = new PdfPCell()
-        cell511.addElement(new Phrase("      5.1.1 SonarQube.",fontAndSize11))
+        cell511.addElement(new Phrase("      5.2.1 SAST (SonarQube).",fontAndSize11))
         cell511.setPadding(5)
         cell511.setColspan(7)
         cell511.setUseAscender(true)
@@ -329,7 +348,7 @@ class GeneratePDFDocument {
         table.addCell(cell511)
 
         PdfPCell cellPag63 = new PdfPCell()
-        cellPag63.addElement(new Phrase("6"))
+        cellPag63.addElement(new Phrase("7"))
         cellPag63.setPadding(5)
         cellPag63.setUseAscender(true)
         cellPag63.setUseDescender(true)
@@ -338,7 +357,7 @@ class GeneratePDFDocument {
         table.addCell(cellPag63)
         //------------
         PdfPCell cell512 = new PdfPCell()
-        cell512.addElement(new Phrase("      5.1.2 Trivy.",fontAndSize11))
+        cell512.addElement(new Phrase("      5.2.2 IaC Security (Trivy).",fontAndSize11))
         cell512.setPadding(5)
         cell512.setColspan(7)
         cell512.setUseAscender(true)
@@ -357,7 +376,7 @@ class GeneratePDFDocument {
         table.addCell(cellPag64)
         //------------
         PdfPCell cell513 = new PdfPCell()
-        cell513.addElement(new Phrase("      5.1.3 Rapidscan..",fontAndSize11))
+        cell513.addElement(new Phrase("      5.2.3 Vulnerability Checks (Rapidscan).",fontAndSize11))
         cell513.setPadding(5)
         cell513.setColspan(7)
         cell513.setUseAscender(true)
@@ -510,7 +529,7 @@ class GeneratePDFDocument {
         def fontAndSize11Bol = FontFactory.getFont(FontFactory.HELVETICA,11, Font.BOLD)
         def fontAndSize11 = FontFactory.getFont(FontFactory.HELVETICA,11, Font.NORMAL)
         PdfPTable table = new PdfPTable(2)
-        PdfPCell cellTittle = new PdfPCell(new Phrase("SonarQube",fontAndSize11Bol))
+        PdfPCell cellTittle = new PdfPCell(new Phrase("SAST (SonarQube)",fontAndSize11Bol))
         cellTittle.setColspan(2)
         cellTittle.setPadding(5)
         cellTittle.setUseAscender(true)
@@ -629,11 +648,145 @@ class GeneratePDFDocument {
         return table
     }
 
+    static def generateSummSonarQubeWthDesc(cantSev1, cantSev2, cantSev3, cantSev4, cantSev5){
+        def fontAndSize11Bol = FontFactory.getFont(FontFactory.HELVETICA,11, Font.BOLD)
+        def fontAndSize11 = FontFactory.getFont(FontFactory.HELVETICA,11, Font.NORMAL)
+        PdfPTable table = new PdfPTable(2)
+        PdfPCell cellTittle = new PdfPCell(new Phrase("SAST (SonarQube)",fontAndSize11Bol))
+        cellTittle.setColspan(2)
+        cellTittle.setPadding(5)
+        cellTittle.setUseAscender(true)
+        cellTittle.setUseDescender(true)
+        cellTittle.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellTittle)
+
+        //------------
+
+        PdfPCell cellDescVal = new PdfPCell()
+        cellDescVal.setColspan(2)
+        cellDescVal.addElement(new Phrase("Descripción: SAST (Static Application Security Testing), es el control necesario para la detección de vulnerabilidades en el código fuente.",fontAndSize11))
+        cellDescVal.setPadding(5)
+        cellDescVal.setUseAscender(true)
+        cellDescVal.setUseDescender(true)
+        cellDescVal.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellDescVal)
+
+        //------------
+
+        PdfPCell cellSevtit = new PdfPCell()
+        cellSevtit.addElement(new Phrase("Severidad",fontAndSize11Bol))
+        cellSevtit.setPadding(5)
+        cellSevtit.setUseAscender(true)
+        cellSevtit.setUseDescender(true)
+        cellSevtit.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellSevtit)
+
+        PdfPCell cellCanttit = new PdfPCell()
+        cellCanttit.addElement(new Phrase("Cantidad",fontAndSize11Bol))
+        cellCanttit.setPadding(5)
+        cellCanttit.setUseAscender(true)
+        cellCanttit.setUseDescender(true)
+        cellCanttit.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellCanttit)
+
+        //------------
+
+        PdfPCell cellVul1 = new PdfPCell()
+        cellVul1.addElement(new Phrase("Bloqueantes",fontAndSize11))
+        cellVul1.setPadding(5)
+        cellVul1.setUseAscender(true)
+        cellVul1.setUseDescender(true)
+        cellVul1.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul1)
+
+        PdfPCell cellVul1Val = new PdfPCell()
+        cellVul1Val.addElement(new Phrase(Integer.toString(cantSev1),fontAndSize11))
+        cellVul1Val.setPadding(5)
+        cellVul1Val.setUseAscender(true)
+        cellVul1Val.setUseDescender(true)
+        cellVul1Val.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul1Val)
+
+        //------------
+
+        PdfPCell cellVul2 = new PdfPCell()
+        cellVul2.addElement(new Phrase("Críticas",fontAndSize11))
+        cellVul2.setPadding(5)
+        cellVul2.setUseAscender(true)
+        cellVul2.setUseDescender(true)
+        cellVul2.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul2)
+
+        PdfPCell cellVul2Val = new PdfPCell()
+        cellVul2Val.addElement(new Phrase(Integer.toString(cantSev2),fontAndSize11))
+        cellVul2Val.setPadding(5)
+        cellVul2Val.setUseAscender(true)
+        cellVul2Val.setUseDescender(true)
+        cellVul2Val.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul2Val)
+
+        //------------
+
+        PdfPCell cellVul3 = new PdfPCell()
+        cellVul3.addElement(new Phrase("Importantes",fontAndSize11))
+        cellVul3.setPadding(5)
+        cellVul3.setUseAscender(true)
+        cellVul3.setUseDescender(true)
+        cellVul3.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul3)
+
+        PdfPCell cellVul3Val = new PdfPCell()
+        cellVul3Val.addElement(new Phrase(Integer.toString(cantSev3),fontAndSize11))
+        cellVul3Val.setPadding(5)
+        cellVul3Val.setUseAscender(true)
+        cellVul3Val.setUseDescender(true)
+        cellVul3Val.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul3Val)
+
+        //------------
+
+        PdfPCell cellVul4 = new PdfPCell()
+        cellVul4.addElement(new Phrase("Menores",fontAndSize11))
+        cellVul4.setPadding(5)
+        cellVul4.setUseAscender(true)
+        cellVul4.setUseDescender(true)
+        cellVul4.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul4)
+
+        PdfPCell cellVul4Val = new PdfPCell()
+        cellVul4Val.addElement(new Phrase(Integer.toString(cantSev4),fontAndSize11))
+        cellVul4Val.setPadding(5)
+        cellVul4Val.setUseAscender(true)
+        cellVul4Val.setUseDescender(true)
+        cellVul4Val.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul4Val)
+
+        //------------
+
+        PdfPCell cellVul5 = new PdfPCell()
+        cellVul5.addElement(new Phrase("Información",fontAndSize11))
+        cellVul5.setPadding(5)
+        cellVul5.setUseAscender(true)
+        cellVul5.setUseDescender(true)
+        cellVul5.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul5)
+
+        PdfPCell cellVul5Val = new PdfPCell()
+        cellVul5Val.addElement(new Phrase(Integer.toString(cantSev5),fontAndSize11))
+        cellVul5Val.setPadding(5)
+        cellVul5Val.setUseAscender(true)
+        cellVul5Val.setUseDescender(true)
+        cellVul5Val.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul5Val)
+
+        return table
+    }
+
     static def generateSummTrivy(cantSev1, cantSev2, cantSev3, cantSev4, cantSev5){
         def fontAndSize11Bol = FontFactory.getFont(FontFactory.HELVETICA,11, Font.BOLD)
         def fontAndSize11 = FontFactory.getFont(FontFactory.HELVETICA,11, Font.NORMAL)
         PdfPTable table = new PdfPTable(2)
-        PdfPCell cellTittle = new PdfPCell(new Phrase("Trivy",fontAndSize11Bol))
+        PdfPCell cellTittle = new PdfPCell(new Phrase("IaC Security (Trivy)",fontAndSize11Bol))
         cellTittle.setColspan(2)
         cellTittle.setPadding(5)
         cellTittle.setUseAscender(true)
@@ -752,17 +905,285 @@ class GeneratePDFDocument {
         return table
     }
 
-    static def generateSummRapidScan(cantSev1, cantSev2, cantSev3, cantSev4, cantSev5){
+    static def generateSummTrivyWthDesc(cantSev1, cantSev2, cantSev3, cantSev4, cantSev5){
         def fontAndSize11Bol = FontFactory.getFont(FontFactory.HELVETICA,11, Font.BOLD)
         def fontAndSize11 = FontFactory.getFont(FontFactory.HELVETICA,11, Font.NORMAL)
         PdfPTable table = new PdfPTable(2)
-        PdfPCell cellTittle = new PdfPCell(new Phrase("Rapidscan",fontAndSize11Bol))
+        PdfPCell cellTittle = new PdfPCell(new Phrase("IaC Security (Trivy)",fontAndSize11Bol))
         cellTittle.setColspan(2)
         cellTittle.setPadding(5)
         cellTittle.setUseAscender(true)
         cellTittle.setUseDescender(true)
         cellTittle.setHorizontalAlignment(Element.ALIGN_CENTER)
         table.addCell(cellTittle)
+
+        //------------
+
+        PdfPCell cellDescVal = new PdfPCell()
+        cellDescVal.setColspan(2)
+        cellDescVal.addElement(new Phrase("Descripción: Seguridad de la infraestructura como código es un test que asimila la infraestructura del cliente para obtener las vulnerabilidades presentes en el servidor.",fontAndSize11))
+        cellDescVal.setPadding(5)
+        cellDescVal.setUseAscender(true)
+        cellDescVal.setUseDescender(true)
+        cellDescVal.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellDescVal)
+
+        //------------
+
+        PdfPCell cellSevtit = new PdfPCell()
+        cellSevtit.addElement(new Phrase("Severidad",fontAndSize11Bol))
+        cellSevtit.setPadding(5)
+        cellSevtit.setUseAscender(true)
+        cellSevtit.setUseDescender(true)
+        cellSevtit.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellSevtit)
+
+        PdfPCell cellCanttit = new PdfPCell()
+        cellCanttit.addElement(new Phrase("Cantidad",fontAndSize11Bol))
+        cellCanttit.setPadding(5)
+        cellCanttit.setUseAscender(true)
+        cellCanttit.setUseDescender(true)
+        cellCanttit.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellCanttit)
+
+        //------------
+
+        PdfPCell cellVul1 = new PdfPCell()
+        cellVul1.addElement(new Phrase("Críticas",fontAndSize11))
+        cellVul1.setPadding(5)
+        cellVul1.setUseAscender(true)
+        cellVul1.setUseDescender(true)
+        cellVul1.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul1)
+
+        PdfPCell cellVul1Val = new PdfPCell()
+        cellVul1Val.addElement(new Phrase(Integer.toString(cantSev1),fontAndSize11))
+        cellVul1Val.setPadding(5)
+        cellVul1Val.setUseAscender(true)
+        cellVul1Val.setUseDescender(true)
+        cellVul1Val.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul1Val)
+
+        //------------
+
+        PdfPCell cellVul2 = new PdfPCell()
+        cellVul2.addElement(new Phrase("Altas",fontAndSize11))
+        cellVul2.setPadding(5)
+        cellVul2.setUseAscender(true)
+        cellVul2.setUseDescender(true)
+        cellVul2.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul2)
+
+        PdfPCell cellVul2Val = new PdfPCell()
+        cellVul2Val.addElement(new Phrase(Integer.toString(cantSev2),fontAndSize11))
+        cellVul2Val.setPadding(5)
+        cellVul2Val.setUseAscender(true)
+        cellVul2Val.setUseDescender(true)
+        cellVul2Val.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul2Val)
+
+        //------------
+
+        PdfPCell cellVul3 = new PdfPCell()
+        cellVul3.addElement(new Phrase("Medias",fontAndSize11))
+        cellVul3.setPadding(5)
+        cellVul3.setUseAscender(true)
+        cellVul3.setUseDescender(true)
+        cellVul3.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul3)
+
+        PdfPCell cellVul3Val = new PdfPCell()
+        cellVul3Val.addElement(new Phrase(Integer.toString(cantSev3),fontAndSize11))
+        cellVul3Val.setPadding(5)
+        cellVul3Val.setUseAscender(true)
+        cellVul3Val.setUseDescender(true)
+        cellVul3Val.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul3Val)
+
+        //------------
+
+        PdfPCell cellVul4 = new PdfPCell()
+        cellVul4.addElement(new Phrase("Bajas",fontAndSize11))
+        cellVul4.setPadding(5)
+        cellVul4.setUseAscender(true)
+        cellVul4.setUseDescender(true)
+        cellVul4.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul4)
+
+        PdfPCell cellVul4Val = new PdfPCell()
+        cellVul4Val.addElement(new Phrase(Integer.toString(cantSev4),fontAndSize11))
+        cellVul4Val.setPadding(5)
+        cellVul4Val.setUseAscender(true)
+        cellVul4Val.setUseDescender(true)
+        cellVul4Val.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul4Val)
+
+        //------------
+
+        PdfPCell cellVul5 = new PdfPCell()
+        cellVul5.addElement(new Phrase("Desconocidas",fontAndSize11))
+        cellVul5.setPadding(5)
+        cellVul5.setUseAscender(true)
+        cellVul5.setUseDescender(true)
+        cellVul5.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul5)
+
+        PdfPCell cellVul5Val = new PdfPCell()
+        cellVul5Val.addElement(new Phrase(Integer.toString(cantSev5),fontAndSize11))
+        cellVul5Val.setPadding(5)
+        cellVul5Val.setUseAscender(true)
+        cellVul5Val.setUseDescender(true)
+        cellVul5Val.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul5Val)
+
+        return table
+    }
+
+    static def generateSummRapidScan(cantSev1, cantSev2, cantSev3, cantSev4, cantSev5){
+        def fontAndSize11Bol = FontFactory.getFont(FontFactory.HELVETICA,11, Font.BOLD)
+        def fontAndSize11 = FontFactory.getFont(FontFactory.HELVETICA,11, Font.NORMAL)
+        PdfPTable table = new PdfPTable(2)
+        PdfPCell cellTittle = new PdfPCell(new Phrase("Vulnerability Checks (Rapidscan)",fontAndSize11Bol))
+        cellTittle.setColspan(2)
+        cellTittle.setPadding(5)
+        cellTittle.setUseAscender(true)
+        cellTittle.setUseDescender(true)
+        cellTittle.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellTittle)
+
+        //------------
+
+        PdfPCell cellSevtit = new PdfPCell()
+        cellSevtit.addElement(new Phrase("Severidad",fontAndSize11Bol))
+        cellSevtit.setPadding(5)
+        cellSevtit.setUseAscender(true)
+        cellSevtit.setUseDescender(true)
+        cellSevtit.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellSevtit)
+
+        PdfPCell cellCanttit = new PdfPCell()
+        cellCanttit.addElement(new Phrase("Cantidad",fontAndSize11Bol))
+        cellCanttit.setPadding(5)
+        cellCanttit.setUseAscender(true)
+        cellCanttit.setUseDescender(true)
+        cellCanttit.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellCanttit)
+
+        //------------
+
+        PdfPCell cellVul1 = new PdfPCell()
+        cellVul1.addElement(new Phrase("Críticas",fontAndSize11))
+        cellVul1.setPadding(5)
+        cellVul1.setUseAscender(true)
+        cellVul1.setUseDescender(true)
+        cellVul1.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul1)
+
+        PdfPCell cellVul1Val = new PdfPCell()
+        cellVul1Val.addElement(new Phrase(Integer.toString(cantSev1),fontAndSize11))
+        cellVul1Val.setPadding(5)
+        cellVul1Val.setUseAscender(true)
+        cellVul1Val.setUseDescender(true)
+        cellVul1Val.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul1Val)
+
+        //------------
+
+        PdfPCell cellVul2 = new PdfPCell()
+        cellVul2.addElement(new Phrase("Altas",fontAndSize11))
+        cellVul2.setPadding(5)
+        cellVul2.setUseAscender(true)
+        cellVul2.setUseDescender(true)
+        cellVul2.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul2)
+
+        PdfPCell cellVul2Val = new PdfPCell()
+        cellVul2Val.addElement(new Phrase(Integer.toString(cantSev2),fontAndSize11))
+        cellVul2Val.setPadding(5)
+        cellVul2Val.setUseAscender(true)
+        cellVul2Val.setUseDescender(true)
+        cellVul2Val.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul2Val)
+
+        //------------
+
+        PdfPCell cellVul3 = new PdfPCell()
+        cellVul3.addElement(new Phrase("Medias",fontAndSize11))
+        cellVul3.setPadding(5)
+        cellVul3.setUseAscender(true)
+        cellVul3.setUseDescender(true)
+        cellVul3.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul3)
+
+        PdfPCell cellVul3Val = new PdfPCell()
+        cellVul3Val.addElement(new Phrase(Integer.toString(cantSev3),fontAndSize11))
+        cellVul3Val.setPadding(5)
+        cellVul3Val.setUseAscender(true)
+        cellVul3Val.setUseDescender(true)
+        cellVul3Val.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul3Val)
+
+        //------------
+
+        PdfPCell cellVul4 = new PdfPCell()
+        cellVul4.addElement(new Phrase("Bajas",fontAndSize11))
+        cellVul4.setPadding(5)
+        cellVul4.setUseAscender(true)
+        cellVul4.setUseDescender(true)
+        cellVul4.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul4)
+
+        PdfPCell cellVul4Val = new PdfPCell()
+        cellVul4Val.addElement(new Phrase(Integer.toString(cantSev4),fontAndSize11))
+        cellVul4Val.setPadding(5)
+        cellVul4Val.setUseAscender(true)
+        cellVul4Val.setUseDescender(true)
+        cellVul4Val.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul4Val)
+
+        //------------
+
+        PdfPCell cellVul5 = new PdfPCell()
+        cellVul5.addElement(new Phrase("Información",fontAndSize11))
+        cellVul5.setPadding(5)
+        cellVul5.setUseAscender(true)
+        cellVul5.setUseDescender(true)
+        cellVul5.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul5)
+
+        PdfPCell cellVul5Val = new PdfPCell()
+        cellVul5Val.addElement(new Phrase(Integer.toString(cantSev5),fontAndSize11))
+        cellVul5Val.setPadding(5)
+        cellVul5Val.setUseAscender(true)
+        cellVul5Val.setUseDescender(true)
+        cellVul5Val.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellVul5Val)
+
+        return table
+    }
+
+    static def generateSummRapidScanWthDesc(cantSev1, cantSev2, cantSev3, cantSev4, cantSev5){
+        def fontAndSize11Bol = FontFactory.getFont(FontFactory.HELVETICA,11, Font.BOLD)
+        def fontAndSize11 = FontFactory.getFont(FontFactory.HELVETICA,11, Font.NORMAL)
+        PdfPTable table = new PdfPTable(2)
+        PdfPCell cellTittle = new PdfPCell(new Phrase("Vulnerability Checks (Rapidscan)",fontAndSize11Bol))
+        cellTittle.setColspan(2)
+        cellTittle.setPadding(5)
+        cellTittle.setUseAscender(true)
+        cellTittle.setUseDescender(true)
+        cellTittle.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellTittle)
+
+        //------------
+
+        PdfPCell cellDescVal = new PdfPCell()
+        cellDescVal.setColspan(2)
+        cellDescVal.addElement(new Phrase("Descripción: Escaneo  de vulnerabilidades de cualquier aplicación, sistema o red en busca de cualquier posible vulnerabilidad, como ataques de SQL Injection, XSS, Ataques DoS, búsqueda de DNS o Firewall, entre otros.",fontAndSize11))
+        cellDescVal.setPadding(5)
+        cellDescVal.setUseAscender(true)
+        cellDescVal.setUseDescender(true)
+        cellDescVal.setHorizontalAlignment(Element.ALIGN_CENTER)
+        table.addCell(cellDescVal)
 
         //------------
 
@@ -929,18 +1350,18 @@ class GeneratePDFDocument {
         /*                                           SECCION 2                                               */
         /****************************************************************************************************/
         Paragraph hsecc2 = new Paragraph("2. Descripción de las pruebas.", FontFactory.getFont(FontFactory.HELVETICA,20, Font.NORMAL))
+        hsecc2.setSpacingAfter(5)
         document.add(hsecc2)
-        document.add(new Paragraph(Chunk.NEWLINE ))
         Paragraph psecc2 = new Paragraph("Para la revisión de vulnerabilidades se ejecutaron las siguientes pruebas", FontFactory.getFont(FontFactory.HELVETICA,12, Font.NORMAL))
         document.add(psecc2)
-        document.add(new Paragraph(Chunk.NEWLINE ))
+        psecc2.setSpacingAfter(5)
 //------------
         Paragraph tsecc21 = new Paragraph("2.1 SAST.", FontFactory.getFont(FontFactory.HELVETICA,16, Font.NORMAL))
         tsecc21.setSpacingAfter(5)
         document.add(tsecc21)
         Paragraph psecc21 = new Paragraph("Herramienta a utilizar: SonarQube.\n" +
                 "Descripccion:\n" +
-                "El análisis consiste en examinar el código fuente para detectar y reportar las debilidades que pueden conducir a vulnerabilidades de seguridad. La herramienta analiza el código fuente detectando vulnerabilidades de seguridad tales como “SQL Injection”, “Log Injection” o “X-site scripting” y otras vulnerabilidades que puedan estar presentes. El análisis incluye la verificación de cumplimiento de estándares de desarrollo y reglas de diseño.\n", FontFactory.getFont(FontFactory.HELVETICA,12, Font.NORMAL))
+                "El análisis consiste en examinar el código fuente para detectar y reportar las debilidades que pueden conducir a vulnerabilidades de seguridad. La herramienta analiza el código fuente detectando vulnerabilidades de seguridad tales como “SQL Injection”, “Log Injection” o “X-site scripting” y otras vulnerabilidades que puedan estar presentes. El análisis incluye la verificación de cumplimiento de estándares de desarrollo y reglas de diseño basandose en el OWASP TOP 10 de vulnerabilidades, para mas referencias en https://owasp.org/www-project-top-ten/. \n", FontFactory.getFont(FontFactory.HELVETICA,12, Font.NORMAL))
         psecc21.setAlignment(Element.ALIGN_JUSTIFIED)
         document.add(psecc21)
         document.add(new Paragraph(Chunk.NEWLINE ))
@@ -1007,12 +1428,22 @@ class GeneratePDFDocument {
         Paragraph hsecc5 = new Paragraph("5. Hallazgos.", FontFactory.getFont(FontFactory.HELVETICA,20, Font.NORMAL))
         hsecc5.setSpacingAfter(5)
         document.add(hsecc5)
-        Paragraph tsecc51 = new Paragraph("5.1 Detalle de Hallazgos.", FontFactory.getFont(FontFactory.HELVETICA,16, Font.NORMAL))
+        Paragraph tsecc51 = new Paragraph("5.1 Resumen de Hallazgos.", FontFactory.getFont(FontFactory.HELVETICA,16, Font.NORMAL))
         tsecc51.setSpacingAfter(5)
         document.add(tsecc51)
-        Paragraph tsecc511 = new Paragraph("5.1.1 SonarQube.", FontFactory.getFont(FontFactory.HELVETICA,16, Font.NORMAL))
-        tsecc511.setSpacingAfter(5)
-        document.add(tsecc511)
+        document.add(new Paragraph(Chunk.NEWLINE ))
+        document.add(generateSummSonarQubeWthDesc(vulBlocker.total,vulCritical.total,vulMajor.total,vulMinor.total,vulInfo.total))
+        document.add(new Paragraph(Chunk.NEWLINE ))
+        document.add(generateSummTrivyWthDesc(trivyVulSevCritical.size(),trivyVulSevHigh.size(),trivyVulSevMedium.size(),trivyVulSevLow.size(),trivyVulSevUnk.size()))
+        document.add(new Paragraph(Chunk.NEWLINE ))
+        document.add(generateSummRapidScanWthDesc(rapidScanVulCritical.size(),rapidScanVulHigh.size(),rapidScanVulMedium.size(),rapidScanVulLow.size(),rapidScanVulInfo.size()))
+        document.newPage()
+        Paragraph tsecc52 = new Paragraph("5.2 Detalle de Hallazgos.", FontFactory.getFont(FontFactory.HELVETICA,16, Font.NORMAL))
+        tsecc52.setSpacingAfter(5)
+        document.add(tsecc52)
+        Paragraph tsecc521 = new Paragraph("5.2.1 SonarQube.", FontFactory.getFont(FontFactory.HELVETICA,16, Font.NORMAL))
+        tsecc521.setSpacingAfter(5)
+        document.add(tsecc521)
         document.add(new Paragraph(Chunk.NEWLINE ))
         document.add(generateSummSonarQube(vulBlocker.total,vulCritical.total,vulMajor.total,vulMinor.total,vulInfo.total))
         document.add(new Paragraph(Chunk.NEWLINE ))
@@ -1025,9 +1456,9 @@ class GeneratePDFDocument {
         proccessIssues(vulInfo,document,"Información","SONARQUBE")
         document.newPage()
 
-        Paragraph tsecc512 = new Paragraph("5.1.2 Trivy.", FontFactory.getFont(FontFactory.HELVETICA,16, Font.NORMAL))
-        tsecc512.setSpacingAfter(5)
-        document.add(tsecc512)
+        Paragraph tsecc522 = new Paragraph("5.2.2 Trivy.", FontFactory.getFont(FontFactory.HELVETICA,16, Font.NORMAL))
+        tsecc522.setSpacingAfter(5)
+        document.add(tsecc522)
         document.add(new Paragraph(Chunk.NEWLINE ))
         document.add(generateSummTrivy(trivyVulSevCritical.size(),trivyVulSevHigh.size(),trivyVulSevMedium.size(),trivyVulSevLow.size(),trivyVulSevUnk.size()))
         document.add(new Paragraph(Chunk.NEWLINE ))
@@ -1039,9 +1470,9 @@ class GeneratePDFDocument {
         proccessIssues(trivyVulSevUnk,document,"Desconocidas","TRIVY")
         document.newPage()
 
-        Paragraph tsecc513 = new Paragraph("5.1.3 Rapidscan.", FontFactory.getFont(FontFactory.HELVETICA,16, Font.NORMAL))
-        tsecc513.setSpacingAfter(5)
-        document.add(tsecc513)
+        Paragraph tsecc523 = new Paragraph("5.2.3 Rapidscan.", FontFactory.getFont(FontFactory.HELVETICA,16, Font.NORMAL))
+        tsecc523.setSpacingAfter(5)
+        document.add(tsecc523)
         document.add(new Paragraph(Chunk.NEWLINE ))
         document.add(generateSummRapidScan(rapidScanVulCritical.size(),rapidScanVulHigh.size(),rapidScanVulMedium.size(),rapidScanVulLow.size(),rapidScanVulInfo.size()))
         document.add(new Paragraph(Chunk.NEWLINE ))
